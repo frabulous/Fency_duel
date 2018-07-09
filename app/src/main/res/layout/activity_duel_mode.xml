@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_duel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/img_fency_mainmenubackground"
+    tools:context="com.fency.fency_duel.DuelModeActivity">
+
+    <ImageView
+        android:id="@+id/ivOpponentState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/ivPlayerState"
+        android:layout_marginEnd="50dp"
+        android:scaleX="-1"
+        app:srcCompat="@mipmap/fency_high_stand"
+        tools:layout_conversion_absoluteHeight="140dp"
+        tools:layout_conversion_absoluteWidth="164dp"
+        tools:layout_conversion_absoluteX="151dp"
+        tools:layout_conversion_absoluteY="307dp"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="307dp" />
+
+    <ImageView
+        android:id="@+id/ivPlayerState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        app:srcCompat="@mipmap/fency_low_stand"
+        tools:layout_conversion_absoluteHeight="140dp"
+        tools:layout_conversion_absoluteWidth="164dp"
+        tools:layout_conversion_absoluteX="54dp"
+        tools:layout_conversion_absoluteY="307dp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="307dp"
+        android:layout_below="@+id/tvResult"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginEnd="42dp" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="128dp"
+        android:fontFamily="cursive"
+        android:text="result"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/card_white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:layout_conversion_absoluteHeight="44dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="125dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="125dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:text="DUEL MODE"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPlayerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/ivPlayerState"
+        android:layout_alignStart="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tvOpponentScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/tvPlayerScore"
+        android:layout_alignBottom="@+id/tvPlayerScore"
+        android:layout_alignEnd="@+id/textView" />
+
+</RelativeLayout>

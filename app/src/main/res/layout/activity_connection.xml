@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_connection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fency.fency_duel.DeviceConnectionActivity">
+
+    <ImageButton
+        android:id="@+id/btnNfc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        app:srcCompat="@mipmap/nfc_logo" />
+
+    <TextView
+        android:id="@+id/tvNfcDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNfc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="Avvicina i due dispositivi"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvManualBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNfcDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:text="oppure"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btnManualBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvManualBT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="manual bt connection" />
+
+    <TextView
+        android:id="@+id/tvRoleBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnManualBT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text=". . ."
+        android:textAlignment="center" />
+
+</RelativeLayout>
