@@ -1,4 +1,3 @@
-
 package com.fency.fency_duel;
 
 import android.app.AlertDialog;
@@ -18,27 +17,17 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Random;
 
 //https://github.com/OmarAflak/Bluetooth-Library
-/*
-MIT License
-
-Copyright (c) 2017 Michel Omar Aflak
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-*/
 import me.aflak.bluetooth.Bluetooth;
 import me.aflak.bluetooth.BluetoothCallback;
 import me.aflak.bluetooth.DeviceCallback;
@@ -60,6 +49,10 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
     private NfcAdapter nfcAdapter;
     private BluetoothAdapter BTAdapter;
     private View btnNfc, btnManualBT;
+    private ScrollView scrollListView;
+    private ListView listView;
+
+    List<BluetoothDevice> pairedDevices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +61,8 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
 
         cntFullScreen = findViewById(R.id.container_connection);
         btnManualBT = findViewById(R.id.btnManualBT);
+        scrollListView = findViewById(R.id.scrollListView);
+        listView = findViewById(R.id.listView);
 
         isBtReady = false;
 
@@ -75,6 +70,7 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
         boolean res = checkCompatibility();
 
         if(!res){
+            Toast.makeText(getApplicationContext(),"device not compatible with duel mode",Toast.LENGTH_LONG).show();
             // quit duel-mode
         }
         else {
@@ -187,8 +183,6 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
 
         myMacAddress = android.provider.Settings.Secure.getString(getApplicationContext().getContentResolver(), "bluetooth_address");
 
-        isBtReady = true;
-
         if(nfcCompatible){
             if (!nfcAdapter.isEnabled()){
                 Toast.makeText(getApplicationContext(),"Please enable NFC",Toast.LENGTH_LONG).show();
@@ -246,7 +240,7 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
             @Override
             public void onDiscoveryStarted() {
                 Toast.makeText(getApplicationContext(),"scanning...", Toast.LENGTH_SHORT).show();
-                setDeviceDiscoverable();
+                //setDeviceDiscoverable();
             }
             @Override
             public void onDiscoveryFinished() {
@@ -280,7 +274,25 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
             @Override
             public void onConnectError(BluetoothDevice device, String message) {}
         });
+
+        listPairedDevices();
+
+        isBtReady = true;
     }//end initialize()
+
+    private void listPairedDevices(){
+        pairedDevices = bluetooth.getPairedDevices();
+        // If there are paired devices, add them to list
+        if (pairedDevices.size() > 0) {
+            //findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
+            for (BluetoothDevice device : pairedDevices) {
+                TextView tv = new TextView(getApplicationContext());
+                String text = device.getName() + " : " + device.getAddress();
+                tv.setText(text);
+                listView.addHeaderView(tv);
+            }
+        }
+    }
 
     private void scanToConnect() {
         Toast.makeText(getApplicationContext(),"scan to connect", Toast.LENGTH_SHORT).show();
@@ -307,6 +319,7 @@ public class DeviceConnectionActivity extends FencyActivity implements View.OnCl
                     btnManualBT.setBackgroundColor(color);
                     //connectAsServer();
                     scanToConnect();
+                    listPairedDevices();
                 }
                 break;
         }
